@@ -1,13 +1,17 @@
 <?php
 
 /**
- * Class for logging events and errors
+ * Class for logging events and errors uses new post type 
  *
  * @package     WP Logging Class
  * @link   		https://github.com/pippinsplugins/WP-Logging
  * @copyright   Copyright (c) 2012, Pippin Williamson
  * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
-*/
+ * 
+ * @package    Plugin_Name
+ * @subpackage Plugin_Name/public
+ * @author     Your Name <email@example.com>
+ */
 
 class Plugin_Name_Logger {
 
@@ -33,8 +37,8 @@ class Plugin_Name_Logger {
 	 * Initialize the class and set its properties.
 	 *
 	 * @since    1.0.0
-	 * @var      string    $plugin_name       The name of this plugin.
-	 * @var      string    $version    The version of this plugin.
+	 * @var      string    $plugin_name     The name of this plugin.
+	 * @var      string    $version    		The version of this plugin.
 	 */
 	public function __construct( $plugin_name, $version ) {
 
@@ -451,6 +455,4 @@ class Plugin_Name_Logger {
 		return (int) $logs->post_count;
 
 	}
-
-}
-$GLOBALS['plugin_name_logs'] = new plugin_name_logger();
+} 

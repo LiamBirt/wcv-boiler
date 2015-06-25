@@ -73,6 +73,7 @@ class Plugin_Name {
 
 		$this->load_dependencies();
 		$this->set_locale();
+		$this->set_logger();
 		$this->define_admin_hooks();
 		$this->define_public_hooks();
 
@@ -165,7 +166,8 @@ class Plugin_Name {
 	 */
 	private function set_logger() {
 
-		$plugin_logger = new Plugin_Name_logger( $this->get_plugin_name(), $this->get_version() );
+		$plugin_logger = new Plugin_Name_Logger( $this->get_plugin_name(), $this->get_version() );
+		$GLOBALS['plugin_name_logs'] = $plugin_logger; 
 
 		$this->loader->add_action( 'init', 								$plugin_logger, 'register_post_type' );
 		$this->loader->add_action( 'init', 								$plugin_logger, 'register_taxonomy' );
