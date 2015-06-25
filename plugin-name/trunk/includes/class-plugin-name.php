@@ -125,6 +125,9 @@ class Plugin_Name {
 		 */
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-plugin-name-public.php';
 
+		/**
+		 * The classes responsible for the admin settings options module 
+		 */
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-plugin-name-option.php';
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/settings/class-plugin-name-callback-helper.php';
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/settings/class-plugin-name-meta-box.php';

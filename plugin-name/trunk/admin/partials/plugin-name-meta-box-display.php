@@ -19,8 +19,8 @@
 ?>
 
 <form action="options.php" method="POST">
-	<?php settings_fields( $this->snake_cased_plugin_name . '_settings' ); ?>
-	<?php do_settings_sections( $this->snake_cased_plugin_name . '_settings_' . $active_tab ); ?>
+	<?php settings_fields( $this->plugin_name . '_settings' ); ?>
+	<?php do_settings_sections( $this->plugin_name . '_settings_' . $active_tab ); ?>
 	<?php submit_button(); ?>
 </form>
 <br class="clear" />

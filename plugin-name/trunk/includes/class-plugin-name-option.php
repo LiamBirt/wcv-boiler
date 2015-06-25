@@ -1,13 +1,5 @@
 <?php
-/**
- *
- *
- * @link       http://example.com
- * @since      1.0.0
- *
- * @package    Plugin_Name
- * @subpackage Plugin_Name/includes
- */
+
 /**
  * The get_option functionality of the plugin.
  *
@@ -15,6 +7,7 @@
  * @package    Plugin_Name
  * @subpackage Plugin_Name/includes
  * @author     Your Name <email@example.com>
+ * @link       http://example.com
  */
 
 
