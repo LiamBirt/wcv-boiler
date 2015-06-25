@@ -11,27 +11,38 @@
 
 class Plugin_Name_Logger {
 
+	/**
+	 * The ID of this plugin.
+	 *
+	 * @since    1.0.0
+	 * @access   private
+	 * @var      string    $plugin_name    The ID of this plugin.
+	 */
+	private $plugin_name;
 
 	/**
-	 * Class constructor.
+	 * The version of this plugin.
 	 *
-	 * @since 1.0
-	 *
-	 * @access public
-	 * @return void
+	 * @since    1.0.0
+	 * @access   private
+	 * @var      string    $version    The current version of this plugin.
 	 */
-	function __construct() {
+	private $version;
 
-		// create the log post type
-		add_action( 'init', array( $this, 'register_post_type' ) );
+	/**
+	 * Initialize the class and set its properties.
+	 *
+	 * @since    1.0.0
+	 * @var      string    $plugin_name       The name of this plugin.
+	 * @var      string    $version    The version of this plugin.
+	 */
+	public function __construct( $plugin_name, $version ) {
 
-		// create types taxonomy and default types
-		add_action( 'init', array( $this, 'register_taxonomy' ) );
-
-		// make a cron job for this hook to start pruning
-		add_action( 'plugin_name_logger_prune_routine', array( $this, 'prune_logs' ) );
+		$this->plugin_name = $plugin_name;
+		$this->version = $version;
 
 	}
+
 
 	/**
 	 * Allows you to tie in a cron job and prune old logs.

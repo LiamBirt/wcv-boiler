@@ -114,6 +114,11 @@ class Plugin_Name {
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-plugin-name-admin.php';
 
 		/**
+		 *  The class responsible for logging available to admin and public 
+		 */
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-plugin-name-logger.php';
+
+		/**
 		 * The class responsible for defining all actions that occur in the public-facing
 		 * side of the site.
 		 */
@@ -145,6 +150,26 @@ class Plugin_Name {
 		$plugin_i18n->set_domain( $this->get_plugin_name() );
 
 		$this->loader->add_action( 'plugins_loaded', $plugin_i18n, 'load_plugin_textdomain' );
+
+	}
+
+
+	/**
+	 * Define the logger for this plugin.
+	 *
+	 * Uses the Plugin_Name_logger class in order to set the logging system 
+	 * with WordPress.
+	 *
+	 * @since    1.0.0
+	 * @access   private
+	 */
+	private function set_logger() {
+
+		$plugin_logger = new Plugin_Name_logger( $this->get_plugin_name(), $this->get_version() );
+
+		$this->loader->add_action( 'init', 								$plugin_logger, 'register_post_type' );
+		$this->loader->add_action( 'init', 								$plugin_logger, 'register_taxonomy' );
+		$this->loader->add_action( 'plugin_name_logger_prune_routine', 	$plugin_logger, 'prune_logs' );
 
 	}
 
