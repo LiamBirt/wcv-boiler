@@ -4,7 +4,7 @@
  * The file that defines the core plugin class
  *
  * A class definition that includes attributes and functions used across both the
- * public-facing side of the site and the admin area.
+ * public-facing side of the site and the dashboard.
  *
  * @link       http://example.com
  * @since      1.0.0
@@ -16,7 +16,7 @@
 /**
  * The core plugin class.
  *
- * This is used to define internationalization, admin-specific hooks, and
+ * This is used to define internationalization, dashboard-specific hooks, and
  * public-facing site hooks.
  *
  * Also maintains the unique identifier of this plugin as well as the current
@@ -61,7 +61,7 @@ class Plugin_Name {
 	 * Define the core functionality of the plugin.
 	 *
 	 * Set the plugin name and the plugin version that can be used throughout the plugin.
-	 * Load the dependencies, define the locale, and set the hooks for the admin area and
+	 * Load the dependencies, define the locale, and set the hooks for the Dashboard and
 	 * the public-facing side of the site.
 	 *
 	 * @since    1.0.0
@@ -85,7 +85,7 @@ class Plugin_Name {
 	 *
 	 * - Plugin_Name_Loader. Orchestrates the hooks of the plugin.
 	 * - Plugin_Name_i18n. Defines internationalization functionality.
-	 * - Plugin_Name_Admin. Defines all hooks for the admin area.
+	 * - Plugin_Name_Admin. Defines all hooks for the dashboard.
 	 * - Plugin_Name_Public. Defines all hooks for the public side of the site.
 	 *
 	 * Create an instance of the loader which will be used to register the hooks
@@ -109,7 +109,7 @@ class Plugin_Name {
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-plugin-name-i18n.php';
 
 		/**
-		 * The class responsible for defining all actions that occur in the admin area.
+		 * The class responsible for defining all actions that occur in the Dashboard.
 		 */
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-plugin-name-admin.php';
 
@@ -118,6 +118,13 @@ class Plugin_Name {
 		 * side of the site.
 		 */
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-plugin-name-public.php';
+
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-plugin-name-option.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/settings/class-plugin-name-callback-helper.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/settings/class-plugin-name-meta-box.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/settings/class-plugin-name-sanitization-helper.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/settings/class-plugin-name-settings-definition.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/settings/class-plugin-name-settings.php';
 
 		$this->loader = new Plugin_Name_Loader();
 
@@ -142,7 +149,7 @@ class Plugin_Name {
 	}
 
 	/**
-	 * Register all of the hooks related to the admin area functionality
+	 * Register all of the hooks related to the dashboard functionality
 	 * of the plugin.
 	 *
 	 * @since    1.0.0
@@ -152,8 +159,24 @@ class Plugin_Name {
 
 		$plugin_admin = new Plugin_Name_Admin( $this->get_plugin_name(), $this->get_version() );
 
-		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
+		// $this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
+
+		// Add the options page and menu item.
+		$this->loader->add_action( 'admin_menu', $plugin_admin, 'add_plugin_admin_menu' );
+
+		// Add an action link pointing to the options page.
+		$plugin_basename = plugin_basename( plugin_dir_path( realpath( dirname( __FILE__ ) ) ) . $this->plugin_name . '.php' );
+		$this->loader->add_action( 'plugin_action_links_' . $plugin_basename, $plugin_admin, 'add_action_links' );
+
+		// Built the option page
+		$settings_callback = new Plugin_Name_Callback_Helper( $this->plugin_name );
+		$settings_sanitization = new Plugin_Name_Sanitization_Helper( $this->plugin_name );
+		$plugin_settings = new Plugin_Name_Settings( $this->get_plugin_name(), $settings_callback, $settings_sanitization);
+		$this->loader->add_action( 'admin_init' , $plugin_settings, 'register_settings' );
+
+		$plugin_meta_box = new Plugin_Name_Meta_Box( $this->get_plugin_name() );
+		$this->loader->add_action( 'load-toplevel_page_' . $this->get_plugin_name() , $plugin_meta_box, 'add_meta_boxes' );
 
 	}
 

@@ -1,8 +1,11 @@
 # WordPress Plugin Boilerplate + WordPress Settings + WP Logging 
 
-This boiler plate is based on the WordPress Plugin Boilerplate and includes the Wordpress Settings and WP Logging systems 
+This boiler plate is based on the WordPress Plugin Boilerplate and includes the Wordpress Settings and WP Logging systems. 
+
+More information can be found at their respective GitHub pages. 
 
 * WordPress Plugin Boilerplate ( https://github.com/DevinVinson/WordPress-Plugin-Boilerplate )
+* WordPress Settings ( https://github.com/wphuman/WordPress-Settings-Module )
 
 A standardized, organized, object-oriented foundation for building high-quality WordPress Plugins.
 
@@ -21,6 +24,8 @@ The WordPress Plugin Boilerplate includes the following files:
 * All classes, functions, and variables are documented so that you know what you need to be changed.
 * The Boilerplate uses a strict file organization scheme that correspond both to the WordPress Plugin Repository structure, and that make it easy to organize the files that compose the plugin.
 * The project includes a `.pot` file as a starting point for internationalization.
+* WordPress Settings
+
 
 ## Installation
 
