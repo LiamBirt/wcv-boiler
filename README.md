@@ -6,6 +6,7 @@ More information can be found at their respective GitHub pages.
 
 * WordPress Plugin Boilerplate ( https://github.com/DevinVinson/WordPress-Plugin-Boilerplate )
 * WordPress Settings ( https://github.com/wphuman/WordPress-Settings-Module )
+* WP-Logging ( https://github.com/pippinsplugins/WP-Logging )
 
 A standardized, organized, object-oriented foundation for building high-quality WordPress Plugins.
 
@@ -25,6 +26,7 @@ The WordPress Plugin Boilerplate includes the following files:
 * The Boilerplate uses a strict file organization scheme that correspond both to the WordPress Plugin Repository structure, and that make it easy to organize the files that compose the plugin.
 * The project includes a `.pot` file as a starting point for internationalization.
 * WordPress Settings
+* WP-Logging
 
 
 ## Installation
