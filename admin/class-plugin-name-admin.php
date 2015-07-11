@@ -40,15 +40,6 @@ class Plugin_Name_Admin {
 	private $version;
 
 	/**
-	 * The snake cased version of plugin ID for making hook tags.
-	 *
-	 * @since    1.0.0
-	 * @access   private
-	 * @var      string    $plugin_name    The ID of this plugin.
-	 */
-	private $snake_cased_plugin_name;
-
-	/**
 	 * Initialize the class and set its properties.
 	 *
 	 * @since    1.0.0
@@ -59,7 +50,6 @@ class Plugin_Name_Admin {
 
 		$this->plugin_name = $plugin_name;
 		$this->version = $version;
-		$this->snake_cased_plugin_name = $this->sanitize_snake_cased( $plugin_name );
 
 	}
 
